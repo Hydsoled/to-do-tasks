@@ -1,10 +1,26 @@
-<div>
-  <button class="btn btn-primary">Add task</button>
-  <div class="row" >
-    <div class="col-md-3" *ngFor="let task of tasks">
-      <h3>{{task.status}}</h3>
-      <div>{{task.user}}</div>
-      <div>{{task.date}}</div>
+<div class="board-wrapper">
+  <div class="board-columns" cdkDropListGroup>
+    <div *ngFor="
+    let column of board.columns"
+         class="board-column"
+         cdkDropList
+         [cdkDropListData]="column.tasks"
+         (cdkDropListDropped)="drop($event)"
+    >
+      <div class="column-title">
+        {{column.name}}
+      </div>
+      <div class="tasks-container">
+        <div
+          *ngFor="let task of column.tasks"
+          class="task"
+          cdkDrag
+        >
+          {{ task.user }}
+          <br>
+          {{ task.date }}
+        </div>
+      </div>
     </div>
   </div>
 </div>
