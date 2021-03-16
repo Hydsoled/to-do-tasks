@@ -1,3 +1,7 @@
+<button class="btn btn-primary" (click)="openModal(template)">Add Task</button>
+<ng-template #template>
+  <app-task-modal></app-task-modal>
+</ng-template>
 <div class="board-wrapper">
   <div class="board-columns" cdkDropListGroup>
     <div *ngFor="

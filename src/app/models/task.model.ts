@@ -1,5 +1,5 @@
 export class Task {
 
-  constructor(public user: string, public status: string, public date: string) {
+  constructor(public _id: string, public user: string, public status: string, public date: Date) {
   }
 }

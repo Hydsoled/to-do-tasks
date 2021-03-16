@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {MainService} from '../../services/main.service';
 
 @Component({
   selector: 'app-header',
@@ -8,13 +7,9 @@ import {MainService} from '../../services/main.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private logService: MainService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-  }
-
-  handTask(): void {
-    this.logService.tasks.next({user: 'usr', status: 'stats', date: 'dat'});
   }
 }
