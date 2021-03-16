@@ -14,10 +14,14 @@
       <div class="column-title">
         {{column.name}}
       </div>
-      <div class="tasks-container">
+      <div
+        class="tasks-container"
+        style="cursor: pointer"
+      >
         <div
           *ngFor="let task of column.tasks"
           class="task"
+          (click)="openModal(template, task)"
           cdkDrag
         >
           {{ task.user }}

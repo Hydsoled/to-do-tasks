@@ -12,27 +12,57 @@ import {Task} from '../../../models/task.model';
 export class TaskModalComponent implements OnInit, OnDestroy {
   user = '';
   status = '';
+  _id = '';
   date: Date;
   httpResponse: Subscription;
+  subTask: Subscription;
+  public task;
 
   constructor(private httpService: HttpService, private mainService: MainService) {
+    this.subTask = this.mainService.getUpdateTask.subscribe((value) => {
+      if (value) {
+        this.user = value.user;
+        this.status = value.status;
+        this.date = value.date;
+        this._id = value._id;
+      }
+    });
   }
 
   ngOnInit(): void {
   }
 
   saveTask(): void {
-    const task = {user: this.user, status: this.status, date: this.date};
-    this.httpResponse = this.httpService.saveTask(task)
-      .subscribe((res: Task[]) => {
-        this.mainService.tasks.next(res);
-      }, error => {
-        this.mainService.tasks.next([error]);
-      });
+    const task = {user: this.user, status: this.status, date: this.date, _id: this._id};
+    this.task = task;
+    if (!this._id) {
+      this.httpResponse = this.httpService.saveTask(task)
+        .subscribe((res: Task[]) => {
+          this.mainService.tasks.next(res);
+        }, error => {
+          this.mainService.tasks.next([error]);
+        });
+    } else {
+      this.httpResponse = this.httpService.updateTask(task)
+        .subscribe((res: string) => {
+          if (res) {
+            this.mainService.tasks.next([task]);
+          }
+        });
+    }
+  }
+
+  deleteTask(): void {
+    this.mainService.deleteTask.next(this._id);
   }
 
   ngOnDestroy(): void {
-    this.httpResponse.unsubscribe();
+    if (this.httpResponse) {
+      this.httpResponse.unsubscribe();
+    }
+    if (this.subTask) {
+      this.subTask.unsubscribe();
+    }
   }
 
 }

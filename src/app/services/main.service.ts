@@ -9,6 +9,8 @@ import {Column} from '../models/column-model';
 })
 export class MainService {
   tasks = new Subject<Task[]>();
+  getUpdateTask = new Subject<Task>();
+  deleteTask = new Subject<string>();
   board: Board = new Board('To do board', [
     new Column('to do', [
     ]),
