@@ -3,6 +3,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class HttpService {
   }
 
   saveTask(task: any): Observable<any> {
-    return this.http.post('http://localhost:27693/api/saveTask', task)
+    return this.http.post(`${environment.BASE_URL}${environment.PORT}/api/saveTask`, task)
       .pipe(map((tasks: any) => {
         tasks = [tasks].map(tsk => {
           tsk.date = tsk.dueDate;
@@ -23,7 +24,7 @@ export class HttpService {
   }
 
   getTasks(): Observable<any> {
-    return this.http.get('http://localhost:27693/api/getTasks')
+    return this.http.get(`${environment.BASE_URL}${environment.PORT}/api/getTasks`)
       .pipe(map((tasks: any) => {
         tasks = tasks.map(task => {
           task.date = task.dueDate;
@@ -34,10 +35,10 @@ export class HttpService {
   }
 
   updateTask(task: Task): Observable<any> {
-    return this.http.post('http://localhost:27693/api/updateTask', task);
+    return this.http.post(`${environment.BASE_URL}${environment.PORT}/api/updateTask`, task);
   }
 
   deleteTask(id: string): Observable<any> {
-    return this.http.post('http://localhost:27693/api/deleteTask', {_id: id});
+    return this.http.post(`${environment.BASE_URL}${environment.PORT}/api/deleteTask`, {_id: id});
   }
 }
