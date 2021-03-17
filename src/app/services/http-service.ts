@@ -12,7 +12,7 @@ export class HttpService {
   }
 
   saveTask(task: any): Observable<any> {
-    return this.http.post('http://localhost:4201/api/saveTask', task)
+    return this.http.post('http://localhost:4200/api/saveTask', task)
       .pipe(map((tasks: any) => {
         tasks = [tasks].map(tsk => {
           tsk.date = tsk.dueDate;
@@ -23,7 +23,7 @@ export class HttpService {
   }
 
   getTasks(): Observable<any> {
-    return this.http.get('http://localhost:4201/api/getTasks')
+    return this.http.get('http://localhost:4200/api/getTasks')
       .pipe(map((tasks: any) => {
         tasks = tasks.map(task => {
           task.date = task.dueDate;
@@ -34,10 +34,10 @@ export class HttpService {
   }
 
   updateTask(task: Task): Observable<any> {
-    return this.http.post('http://localhost:4201/api/updateTask', task);
+    return this.http.post('http://localhost:4200/api/updateTask', task);
   }
 
   deleteTask(id: string): Observable<any> {
-    return this.http.post('http://localhost:4201/api/deleteTask', {_id: id});
+    return this.http.post('http://localhost:4200/api/deleteTask', {_id: id});
   }
 }

@@ -12,9 +12,9 @@ mongoose.connect('mongodb+srv://hydsoled:App123@cluster0.pfyqe.mongodb.net/croco
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
-// app.use(express.static('dist/to-do-project'))
+app.use(express.static('dist/to-do-project'))
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 
 app.post('/api/saveTask', async (req, res) => {
   const task = req.body
@@ -63,6 +63,6 @@ app.get('/api/getTasks', async (req, res) => {
   res.json(tasks);
 })
 
-app.listen(4201, () => {
-  console.log('listening to http://localhost:4201');
+app.listen(4200, () => {
+  console.log('listening to http://localhost:4200');
 });
