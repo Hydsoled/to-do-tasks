@@ -63,6 +63,6 @@ app.get('/api/getTasks', async (req, res) => {
   res.json(tasks);
 })
 
-app.listen(4200, () => {
+app.listen(process.env.PORT || 4200, () => {
   console.log('listening to http://localhost:4200');
 });
