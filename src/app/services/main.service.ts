@@ -10,15 +10,13 @@ import {Column} from '../models/column-model';
 export class MainService {
   tasks = new Subject<Task[]>();
   getUpdateTask = new Subject<Task>();
-  deleteTask = new Subject<string>();
+  deleteTask = new Subject<any>();
   board: Board = new Board('To do board', [
-    new Column('to do', [
-    ]),
-    new Column('in progress', [
-    ]),
-    new Column('done', [
-    ]),
+    new Column('to do', []),
+    new Column('in progress', []),
+    new Column('done', []),
   ]);
+
   constructor() {
   }
 }

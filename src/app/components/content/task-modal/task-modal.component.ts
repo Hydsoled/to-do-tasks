@@ -46,6 +46,7 @@ export class TaskModalComponent implements OnInit, OnDestroy {
       this.httpResponse = this.httpService.updateTask(task)
         .subscribe((res: string) => {
           if (res) {
+            this.mainService.deleteTask.next({_id: task._id, update: true});
             this.mainService.tasks.next([task]);
           }
         });
@@ -53,7 +54,7 @@ export class TaskModalComponent implements OnInit, OnDestroy {
   }
 
   deleteTask(): void {
-    this.mainService.deleteTask.next(this._id);
+    this.mainService.deleteTask.next({_id: this._id, update: false});
   }
 
   ngOnDestroy(): void {

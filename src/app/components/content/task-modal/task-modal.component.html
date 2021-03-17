@@ -1,12 +1,15 @@
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css"/>
 <link rel="stylesheet" href="https://unpkg.com/ngx-bootstrap/datepicker/bs-datepicker.css">
 <div class="modal-body">
   <div class="modal-header">
-    <input [(ngModel)]="user" class="form-control"/>
+    <div class="form-group">
+      <label>User:</label>
+      <input [(ngModel)]="user" class="form-control"/>
+    </div>
   </div>
   <div style="margin: 30px">
     <div class="form-group">
-      <label>Select Status:</label>
+      <label>Select status:</label>
       <select class="form-control" [(ngModel)]="status">
         <option>to do</option>
         <option>in progress</option>
@@ -16,6 +19,7 @@
   </div>
   <div class="modal-footer">
     <div class="col-xs-12 col-12 col-md-4 form-group">
+      <label>Due date:</label>
       <input type="text"
              placeholder="Datepicker"
              class="form-control"

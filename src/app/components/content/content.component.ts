@@ -31,19 +31,21 @@ export class ContentComponent implements OnInit, OnDestroy {
           }));
         });
       });
-    this.mainServices.deleteTask.subscribe((taskId) => {
+    this.mainServices.deleteTask.subscribe((val) => {
       for (let i = 0; i < this.board.columns.length; i++) {
         for (let j = 0; j < this.board.columns[i].tasks.length; j++) {
-          if (this.board.columns[i].tasks[j]._id === taskId) {
+          if (this.board.columns[i].tasks[j]._id === val._id) {
             this.board.columns[i].tasks.splice(j, 1);
           }
         }
       }
-      this.deleteTask = this.httpService.deleteTask(taskId).subscribe((val) => {
-        if (val) {
-          this.modalRef.hide();
-        }
-      });
+      if (!val.update) {
+        this.deleteTask = this.httpService.deleteTask(val._id).subscribe((value) => {
+          if (value) {
+            this.modalRef.hide();
+          }
+        });
+      }
     });
   }
 
@@ -75,6 +77,9 @@ export class ContentComponent implements OnInit, OnDestroy {
 
   public openModal(template: TemplateRef<any>, task?): void {
     this.modalRef = this.modalService.show(template);
+    if (task) {
+      task.date = new Date(task.date);
+    }
     this.mainServices.getUpdateTask.next(task);
   }
 

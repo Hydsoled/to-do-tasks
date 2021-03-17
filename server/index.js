@@ -58,6 +58,7 @@ app.post('/api/deleteTask', async (req, res) => {
 })
 
 app.get('/api/getTasks', async (req, res) => {
+  console.log('hey');
   const tasks = await Task.find({});
   res.json(tasks);
 })
