@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   PORT: 4200,
-  BASE_URL: 'http://localhost'
+  BASE_URL: 'http://localhost:'
 };
 
 /*

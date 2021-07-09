@@ -14,7 +14,7 @@ mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 app.use(express.static('dist/to-do-project'))
 app.use(bodyParser.json());
-// app.use(cors());
+app.use(cors());
 
 app.post('/api/saveTask', async (req, res) => {
   const task = req.body
